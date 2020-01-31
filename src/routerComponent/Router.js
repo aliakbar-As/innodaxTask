@@ -31,7 +31,6 @@ class RouterComponent extends Component {
                         <Scene
                             component={Settings}
                             key={'settings'}
-                            initial
                             hideNavBar
                         />
 
@@ -69,6 +68,7 @@ class RouterComponent extends Component {
                         <Scene
                             component={SuccessfulRegistration}
                             key={'successfulRegistration'}
+                            initial
                             hideNavBar
                         />
                     </Scene>

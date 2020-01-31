@@ -10,14 +10,56 @@ import {
 import { Button } from '../../components';
 import GetString from '../../assets/languages/GetString';
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const widthScreen = Dimensions.get('window').width;
 const tick = require('../../assets/images/tick.png');
+
+let hdrItems = [
+    {
+        id: 0,
+        title: 'first one',
+        icon: 'paper-plane',
+        passed: true,
+    },
+    {
+        id: 1,
+        title: 'second one',
+        icon: 'v-card',
+        passed: true,
+    },
+    {
+        id: 2,
+        title: 'third one',
+        icon: 'user',
+        passed: true,
+    }
+];
 
 class SuccessfulRegistration extends Component {
     render() {
         return (
             <View style={styles.container}>
+
+
+                <View style={styles.mainHdrItemContainer}>
+                    {hdrItems.map(item => {
+                        return (
+                            <View style={[styles.hdrItemContainer, {
+                                backgroundColor: item.passed ? '#727AF9' : '#CFD4E4',
+                                zIndex: 1
+                            }]}>
+                                <Icon
+                                    name={item.icon}
+                                    size={15}
+                                    color={'#fff'}
+                                />
+                            </View>
+                        );
+                    })}
+                    <View style={styles.lineContainer} />
+                </View>
+
                 <ScrollView style={{ paddingBottom: 16 }}>
                     <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
                         {GetString().successHdrTitle}
@@ -58,6 +100,36 @@ class SuccessfulRegistration extends Component {
     };
 };
 const styles = {
+    mainHdrItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 40,
+        justifyContent: 'space-around',
+        marginVertical: 16
+    },
+    hdrItemContainer: {
+        height: 50,
+        width: 50,
+        alignItems: 'center',
+        backgroundColor: '#CED1E2',
+        borderRadius: 100,
+        justifyContent: 'center',
+    },
+    lineContainer: {
+        height: 1,
+        backgroundColor: '#CED1E2',
+        width: '60%',
+        position: 'absolute',
+        right: '30%',
+        left: '30%',
+        top: '50%',
+        bottom: '50%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+
+    },
+
+
     tickIcon: {
         width: 100,
         height: 100,

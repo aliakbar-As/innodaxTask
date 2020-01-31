@@ -10,7 +10,7 @@ import {
     Alert,
     Picker
 } from 'react-native';
-import { Input, Button } from '../../components';
+import { Input, Button, Line } from '../../components';
 import Icon from 'react-native-vector-icons/Entypo';
 import { ModalComponent } from '../../components/ModalComponent';
 import { Actions } from 'react-native-router-flux';
@@ -23,6 +23,26 @@ const iran = require('../../assets/images/countries/iran.png');
 const us = require('../../assets/images/countries/us.png');
 const canada = require('../../assets/images/countries/canada.png');
 
+let hdrItems = [
+    {
+        id: 0,
+        title: 'first one',
+        icon: 'paper-plane',
+        passed: false,
+    },
+    {
+        id: 1,
+        title: 'second one',
+        icon: 'v-card',
+        passed: false,
+    },
+    {
+        id: 2,
+        title: 'third one',
+        icon: 'user',
+        passed: false,
+    }
+];
 
 @inject('home')
 @observer
@@ -75,6 +95,21 @@ class Account extends Component {
         ];
         return (
             <View style={styles.container}>
+                <View style={styles.mainHdrItemContainer}>
+                    {hdrItems.map(item => {
+                        return (
+                            <View style={[styles.hdrItemContainer, { backgroundColor: item.passed ? '#727AF9' : '#CFD4E4' }]}>
+                                <Icon
+                                    name={item.icon}
+                                    size={15}
+                                    color={'#fff'}
+                                />
+                            </View>
+                        );
+                    })}
+                    <View style={styles.lineContainer} />
+                </View>
+
 
                 <ScrollView>
                     <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
@@ -152,7 +187,7 @@ class Account extends Component {
                     disabled={this.state.disabled}
                     extraStyles={{ backgroundColor: this.state.disabled ? '#CBD1DF' : '#7577FF' }}
                     onPress={() => this.confirmInfoOnclick()}
-                    title={ GetString().nextButton}
+                    title={GetString().nextButton}
                 />
 
                 <Modal
@@ -219,10 +254,39 @@ class Account extends Component {
 
 };
 const styles = {
+    mainHdrItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 40,
+        justifyContent: 'space-around',
+        marginVertical: 16
+    },
+    hdrItemContainer: {
+        height: 50,
+        width: 50,
+        alignItems: 'center',
+        backgroundColor: '#CED1E2',
+        borderRadius: 100,
+        justifyContent: 'center',
+    },
+    lineContainer: {
+        height: 1,
+        backgroundColor: '#CED1E2',
+        width: '60%',
+        position: 'absolute',
+        right: '30%',
+        left: '30%',
+        top: '50%',
+        bottom: '50%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+
+    },
+    ///////////////////////
+
     modalFlagContainer: {
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
-        // flexDirection: thisprops.home.language === 'en' ? 'row' : 'row-reverse',
         flexDirection: row(),
         justifyContent: flex(),
         alignItems: 'center',

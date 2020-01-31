@@ -10,7 +10,7 @@ import {
     TouchableHighlight,
     Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Entypo';
 import { Button } from '../../components';
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
@@ -19,6 +19,27 @@ import GetString from '../../assets/languages/GetString';
 
 
 const widthScreen = Dimensions.get('window').width;
+
+let hdrItems = [
+    {
+        id: 0,
+        title: 'first one',
+        icon: 'paper-plane',
+        passed: true,
+    },
+    {
+        id: 1,
+        title: 'second one',
+        icon: 'v-card',
+        passed: false,
+    },
+    {
+        id: 2,
+        title: 'third one',
+        icon: 'user',
+        passed: false,
+    }
+];
 
 
 @inject('login')
@@ -42,7 +63,7 @@ class UploadImage extends Component {
             takePhotoButtonTitle: GetString().takePhotoButtonTitle,
             chooseFromLibraryButtonTitle: GetString().chooseFromLibraryButtonTitle,
             // customButtons: [{name: 'removeImage', title: 'حذف عکس'}],
-        
+
             storageOptions: {
                 skipBackup: true,
                 path: 'images',
@@ -51,7 +72,7 @@ class UploadImage extends Component {
             maxWidth: 1000,
             maxHeight: 1000
         };
-        
+
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
             let result = response.data;
@@ -94,6 +115,26 @@ class UploadImage extends Component {
 
         return (
             <View style={styles.container}>
+
+
+                <View style={styles.mainHdrItemContainer}>
+                    {hdrItems.map(item => {
+                        return (
+                            <View style={[styles.hdrItemContainer, {
+                                backgroundColor: item.passed ? '#727AF9' : '#CFD4E4',
+                                zIndex: 1
+                            }]}>
+                                <Icon
+                                    name={item.icon}
+                                    size={15}
+                                    color={'#fff'}
+                                />
+                            </View>
+                        );
+                    })}
+                    <View style={styles.lineContainer} />
+                </View>
+
                 <ScrollView style={{ paddingBottom: 16 }}>
                     <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
                         {GetString().uploadImage}
@@ -101,8 +142,8 @@ class UploadImage extends Component {
 
 
                     <Text style={styles.innerTitle}>
-                    {GetString().uploadDes}
-                        
+                        {GetString().uploadDes}
+
                     </Text>
 
                     {this.viewImages()}
@@ -117,7 +158,7 @@ class UploadImage extends Component {
                             style={styles.imgBackground}
                         >
                             <Icon
-                                name={'idcard'}
+                                name={'image'}
                                 size={50}
                                 color={'gray'}
                             />
@@ -168,6 +209,36 @@ class UploadImage extends Component {
 };
 
 const styles = {
+    mainHdrItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 40,
+        justifyContent: 'space-around',
+        marginVertical: 16
+    },
+    hdrItemContainer: {
+        height: 50,
+        width: 50,
+        alignItems: 'center',
+        backgroundColor: '#CED1E2',
+        borderRadius: 100,
+        justifyContent: 'center',
+    },
+    lineContainer: {
+        height: 1,
+        backgroundColor: '#CED1E2',
+        width: '60%',
+        position: 'absolute',
+        right: '30%',
+        left: '30%',
+        top: '50%',
+        bottom: '50%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+
+    },
+
+
     buttonStyle: {
         width: widthScreen / 2 - 30,
         alignSelf: 'center',
