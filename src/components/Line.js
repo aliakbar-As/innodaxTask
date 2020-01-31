@@ -9,7 +9,7 @@ const Line = ({
     return (
         <View style={[{
             height: 1,
-            marginHorizontal: 10,
+            // marginHorizontal: 10,
             marginTop: 10,
             backgroundColor: '#C3C3C3',
         }, extraStyles]} />

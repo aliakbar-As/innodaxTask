@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import GetString from '../../assets/languages/GetString';
+import { row } from '../../assets/styles/styles';
 
 const passport = require('../../assets/images/identity/passport.png');
 const driver = require('../../assets/images/identity/driver.png');
@@ -118,7 +119,7 @@ const styles = {
         marginTop: 10
     },
     innerContainer: {
-        flexDirection: 'row',
+        flexDirection: row(),
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 16,

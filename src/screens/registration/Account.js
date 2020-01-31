@@ -16,6 +16,7 @@ import { ModalComponent } from '../../components/ModalComponent';
 import { Actions } from 'react-native-router-flux';
 import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
+import { flex, row, position, fontBold } from '../../assets/styles/styles';
 
 const australia = require('../../assets/images/countries/australia.png');
 const iran = require('../../assets/images/countries/iran.png');
@@ -26,6 +27,7 @@ const canada = require('../../assets/images/countries/canada.png');
 @inject('home')
 @observer
 class Account extends Component {
+
     constructor(props) {
         super(props);
 
@@ -116,7 +118,7 @@ class Account extends Component {
 
                     </View>
 
-                    <View style={{ paddingLeft: 16, }}>
+                    <View style={{ paddingHorizontal: 16, }}>
                         <Text style={styles.hdrCardsectionTitle}>
                             {GetString().country}
                         </Text>
@@ -130,7 +132,7 @@ class Account extends Component {
                                         source={this.state.flag}
                                         style={styles.flagIcons}
                                     />
-                                    <Text style={[styles.hdrCardsectionTitle, { fontSize: 15, marginLeft: 10 }]}>
+                                    <Text style={[styles.hdrCardsectionTitle, { fontSize: 15, marginHorizontal: 10 }]}>
                                         {this.state.flagTitle}
                                     </Text>
                                 </View>
@@ -221,8 +223,8 @@ const styles = {
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
         // flexDirection: thisprops.home.language === 'en' ? 'row' : 'row-reverse',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+        flexDirection: row(),
+        justifyContent: flex(),
         alignItems: 'center',
         marginTop: 16,
         paddingLeft: 10,
@@ -247,16 +249,15 @@ const styles = {
     },
     innerCountryContainer: {
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
+        justifyContent: flex(),
+        flexDirection: row(),
     },
     countryContainer: {
         borderWidth: 1,
         borderColor: '#ddd',
         padding: 10,
-        marginRight: 10,
         marginTop: 10,
-        flexDirection: 'row',
+        flexDirection: row(),
         justifyContent: 'space-between',
         alignItems: 'center',
     },
@@ -265,24 +266,25 @@ const styles = {
         width: 30,
     },
     cardSection: {
-        flexDirection: 'row',
+        flexDirection: row(),
         alignItems: 'center',
         justifyContent: 'space-between'
     },
     hdrCardsectionTitle: {
-        fontWeight: '600',
-        textAlign: 'left',
+        textAlign: position(),
+        // textAlign: 'right',
+        fontfamily: 'IRANSans(FaNum)_Bold',
         fontSize: 16,
         color: '#000'
     },
     hdrTitle: {
-        fontWeight: '700',
+        fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
         fontSize: 18,
         color: '#000'
     },
     innerTitle: {
-        fontWeight: '600',
+        fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
         color: 'gray',
         marginVertical: 16

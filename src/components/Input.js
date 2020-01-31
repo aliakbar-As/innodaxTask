@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Actions } from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/AntDesign';
+import { position, row } from "../assets/styles/styles";
 
 
 const Input = ({
@@ -37,6 +38,7 @@ const Input = ({
                         size={iconSize}
                         onPress={clearOnpress}
                     /> */}
+                    
 
                 <TextInput
                     autoFocus={autoFocus}
@@ -62,12 +64,12 @@ const styles = {
         width: '100%',
         height: 40,
         fontFamily: 'num',
-        textAlign: 'left',
+        textAlign: position(),
     },
     container: {
         borderWidth: 1,
         borderColor: '#ddd',
-        flexDirection: 'row-reverse',
+        flexDirection: row(),
         alignItems: 'center',
         padding: 5,
         height: 45,

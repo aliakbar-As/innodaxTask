@@ -31,6 +31,7 @@ class RouterComponent extends Component {
                         <Scene
                             component={Settings}
                             key={'settings'}
+                            initial
                             hideNavBar
                         />
 
@@ -49,7 +50,6 @@ class RouterComponent extends Component {
 
                         <Scene
                             component={UploadImage}
-                            initial
                             key={'uploadImages'}
                             hideNavBar
                         />

@@ -31,7 +31,7 @@ class SuccessfulRegistration extends Component {
 
                     <Image
                         source={tick}
-                        style={{ width: 100, height: 100, alignSelf: 'center', marginVertical: 16 }}
+                        style={styles.tickIcon}
                     />
 
                     <Button
@@ -58,6 +58,12 @@ class SuccessfulRegistration extends Component {
     };
 };
 const styles = {
+    tickIcon: {
+        width: 100,
+        height: 100,
+        alignSelf: 'center',
+        marginVertical: 16
+    },
     buttonStyle: {
         width: widthScreen / 2 + 10,
         alignSelf: 'center',

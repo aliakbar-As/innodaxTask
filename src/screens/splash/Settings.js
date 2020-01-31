@@ -20,6 +20,7 @@ import { Button, Line } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
+import { row, flex, position } from '../../assets/styles/styles';
 
 const { width, height } = Dimensions.get('window');
 
@@ -73,22 +74,22 @@ class Settings extends React.Component {
             <View style={styles.container}>
 
                 <Animated.View style={[styles.lightboxContainer, this.state.xy.getLayout()]}>
-
+{/* 
                     <TouchableOpacity
-                        style={[styles.onclicks, { alignSelf: 'flex-start' }]}
+                        style={[styles.onclicks, { alignSelf: flex() }]}
                         onPress={() => Actions.pop()}>
                         <Icon
                             size={30}
                             color={'#7E7D7D'}
                             name={'closecircleo'} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <Text style={styles.hdrtitle}>
                         {GetString().filterLanguage}
                     </Text>
 
                     <ScrollView>
-                        <View style={{ alignItems: 'flex-end' }}>
+                        <View style={{ alignItems: flex() }}>
                             <TouchableHighlight
                                 underlayColor={'transparent'}
                                 onPress={() => this.setState({ radioId: 0 })}>
@@ -121,7 +122,7 @@ class Settings extends React.Component {
                             {GetString().filterTheme}
                         </Text>
 
-                        <View style={{ alignItems: 'flex-end' }}>
+                        <View style={{ alignItems: flex() }}>
                             <TouchableHighlight
                                 underlayColor={'transparent'}
                                 onPress={() => this.setState({ themeId: 0 })}>
@@ -151,7 +152,7 @@ class Settings extends React.Component {
                     <Button
                         extraStyles={{ margin: 16 }}
                         onPress={() => this.confirm()}
-                        title={'اعمال'}
+                        title={GetString().confirmButton}
                     />
                 </Animated.View>
 
@@ -169,12 +170,7 @@ class Settings extends React.Component {
 };
 
 const styles = StyleSheet.create({
-    checkboxContainers: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        marginTop: 10,
-    },
+    
     radioContainer: {
         height: 20,
         width: 20,
@@ -182,19 +178,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignItems: 'center',
         borderColor: '#6981D9',
-        marginBottom: 5,
+        // marginBottom: 5,
     },
     reserveContainer: {
-        flexDirection: 'row-reverse',
+        flexDirection: row(),
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: flex(),
         padding: 16,
-        alignItems: 'flex-end'
+        alignItems: flex(),
     },
     hdrtitle: {
         fontSize: 16,
         fontFamily: 'num',
-        textAlign: 'right',
+        textAlign: position(),
         color: '#343434',
         marginTop: 10,
     },
@@ -203,12 +199,12 @@ const styles = StyleSheet.create({
         fontFamily: 'num',
         textAlign: 'center',
         color: '#505050',
-        marginRight: 10,
+        marginHorizontal: 10,
     },
     onclicks: {
         padding: 16,
         margin: -16,
-        alignSelf: 'flex-end'
+        alignSelf: flex()
     },
     container: {
         backgroundColor: 'rgba(0,0,0,0.6)',
