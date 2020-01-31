@@ -9,9 +9,9 @@ import {
     Dimensions
 } from 'react-native';
 
-const checkedIcon = require('../assets/images/checked.png');
-const unChecked = require('../assets/images/unChecked.png');
-const play = require('../assets/images/play.png');
+const checkedIcon = require('../assets/images/countries/iran.png');
+const unChecked = require('../assets/images/countries/iran.png');
+const play = require('../assets/images/countries/iran.png');
 const widthSize = Dimensions.get('window').width;
 
 const CardSection = ({

@@ -3,22 +3,17 @@ import { persist } from 'mobx-persist';
 
 
 export default class LoginStores {
-    @persist @observable token = 'J7w3gTSRsAYSUD6SgbRemz+KntVILwPmYGGfZJ1HTeH7tVyjzOmspVBmR3c7KqjQ';
+    @persist @observable token = '';
 
-    @observable methodsList = [];
-
-    @observable name = '';
-    @observable mobile = '';
-    @observable year = '';
-    @observable month = '';
-    @observable day = '';
-
+    @observable userImageUploaded = [];
+    @observable userImage = '';
 
 
 
 
     // actions
-    @action setToken(token) {
-        this.token = token;
+    @action setUserImageUploaded(images) {
+        this.userImage = images;
+        this.userImageUploaded = this.setUserImageUploaded.concat(images);
     };
 }

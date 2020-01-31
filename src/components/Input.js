@@ -29,32 +29,14 @@ const Input = ({
     placeholderTextColor,
     clearOnpress
 }) => {
-    if (primary) {
-        return (
-            <View style={[styles.pcontainer, extraStyles]}>
-
-                <TextInput
-                    autoFocus={autoFocus}
-                    returnKeyType={returnKeyType}
-                    keyboardType={keyboardType}
-                    style={[styles.input, extraInpuStyles]}
-                    placeholder={placeholder}
-                    selectionColor={selectionColor}
-                    value={value}
-                    placeholderTextColor={placeholderTextColor}
-                    onChangeText={onChangeText}
-                />
-            </View>
-        );
-    } else {
         return (
             <View style={[styles.container, extraStyles]}>
-                    <Icon
+                    {/* <Icon
                         name={iconName}
                         color={iconColor}
                         size={iconSize}
                         onPress={clearOnpress}
-                    />
+                    /> */}
 
                 <TextInput
                     autoFocus={autoFocus}
@@ -69,21 +51,9 @@ const Input = ({
                 />
             </View>
         );
-    };
 };
 const styles = {
-    pcontainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderWidth: 1,
-        borderColor: '#D1D1D1',
-        borderRadius: 20,
-        backgroundColor: '#FBFBFB',
-        paddingHorizontal: 10,
-        width: '100%',
-        marginTop: 5
-    },
+  
     onclicks: {
         padding: 15,
         margin: -15,
@@ -92,17 +62,17 @@ const styles = {
         width: '100%',
         height: 40,
         fontFamily: 'num',
-        textAlign: 'right',
+        textAlign: 'left',
     },
     container: {
-        borderWidth: 2,
-        borderColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#ddd',
         flexDirection: 'row-reverse',
         alignItems: 'center',
         padding: 5,
         height: 45,
         paddingHorizontal: 16,
-        borderRadius: 20,
+        borderRadius: 1,
         marginVertical: 10,
     }
 };

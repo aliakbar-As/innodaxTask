@@ -5,6 +5,17 @@ import { create, persist } from 'mobx-persist';
 export default class HomeStores {
 
 
-    @persist    @observable     sgfsgsdg = '';
 
+    @persist    @observable     currentLanguage = 'en';
+    @persist    @observable     currentTheme = 'light';
+
+
+    @action setLanguages(value) {
+        this.currentLanguage = value;
+    };
+
+    
+    @action setTheme(theme) {
+        this.currentTheme = theme;
+    };
 }

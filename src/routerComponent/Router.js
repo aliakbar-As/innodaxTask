@@ -3,7 +3,7 @@ import {
     View,
     Text,
     Image,
-    DrawerLayoutAndroid
+    DrawerLayoutAndroid,
 } from 'react-native';
 import {
     Scene,
@@ -11,24 +11,70 @@ import {
     Drawer,
     Stack,
     Lightbox,
-    Actions
 } from 'react-native-router-flux';
-import { Account } from '../screens/registration';
-
+import {
+    Account,
+    Identity,
+    UploadImage,
+    PassportPhoto,
+    TakingSelfie,
+    SuccessfulRegistration
+} from '../screens/registration';
+import { Settings } from '../screens/splash';
 
 class RouterComponent extends Component {
     render() {
         return (
             <Router>
-                <Scene key={'root'}>
+                <Lightbox>
+                    <Scene key={'root'}>
+                        <Scene
+                            component={Settings}
+                            key={'settings'}
+                            hideNavBar
+                        />
 
-                    <Scene
-                        component={Account}
-                        key={'account'}
-                        hideNavBar
-                        initial
-                    />
-                </Scene>
+                        <Scene
+                            component={Account}
+                            key={'account'}
+                            hideNavBar
+
+                        />
+
+                        <Scene
+                            component={Identity}
+                            key={'identity'}
+                            hideNavBar
+                        />
+
+                        <Scene
+                            component={UploadImage}
+                            initial
+                            key={'uploadImages'}
+                            hideNavBar
+                        />
+
+                        <Scene
+                            component={PassportPhoto}
+                            key={'passport'}
+                            hideNavBar
+                        />
+
+                        <Scene
+                            component={TakingSelfie}
+                            key={'selfie'}
+                            hideNavBar
+                        />
+
+                        <Scene
+                            component={SuccessfulRegistration}
+                            key={'successfulRegistration'}
+                            hideNavBar
+                        />
+                    </Scene>
+
+
+                </Lightbox>
             </Router>
         );
     };

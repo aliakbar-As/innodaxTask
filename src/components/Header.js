@@ -10,7 +10,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const menuBar = require('../assets/images/menu.png');
+const menuBar = require('../assets/images/countries/iran.png');
 
 const Header = ({
     primary,
