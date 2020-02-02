@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 import GetString from '../../assets/languages/GetString';
 import { row } from '../../assets/styles/styles';
 import Icon from 'react-native-vector-icons/Entypo';
+import GetColors from '../../assets/styles/themes/GetColors';
 
 const passport = require('../../assets/images/identity/passport.png');
 const driver = require('../../assets/images/identity/driver.png');
@@ -66,13 +67,11 @@ class Identity extends Component {
                     {hdrItems.map(item => {
                         return (
                             <View style={[styles.hdrItemContainer, { 
-                                backgroundColor: item.passed ? '#727AF9' : '#CFD4E4',
-                                zIndex: 1
-                                }]}>
+                                backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed, zIndex: 1 }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={'#fff'}
+                                    color={GetColors().hdrIconColor}
                                 />
                             </View>
                         );
@@ -154,13 +153,13 @@ const styles = {
         height: 50,
         width: 50,
         alignItems: 'center',
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         borderRadius: 100,
         justifyContent: 'center',
     },
     lineContainer: {
         height: 1,
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -174,7 +173,7 @@ const styles = {
 
     itemsContainer: {
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: GetColors().borderColor,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -183,7 +182,7 @@ const styles = {
     },
     primarytitle: {
         fontSize: 14,
-        color: 'gray',
+        color: GetColors().acountInnerTitleColor,
         textAlign: 'center',
         marginTop: 10
     },
@@ -198,17 +197,17 @@ const styles = {
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 18,
-        color: '#000'
+        color: GetColors().acountHdrTitleColor
     },
     innerTitle: {
         fontWeight: '600',
         textAlign: 'center',
-        color: 'gray',
+        color: GetColors().acountInnerTitleColor,
         marginVertical: 16,
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { Identity };

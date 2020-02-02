@@ -21,6 +21,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
 import { row, flex, position } from '../../assets/styles/styles';
+import RNRestart from 'react-native-restart';
 
 const { width, height } = Dimensions.get('window');
 
@@ -163,8 +164,10 @@ class Settings extends React.Component {
     confirm() {
         this.props.home.setLanguages(this.state.radioId === 0 ? 'fa' : 'en');
 
-        this.props.home.setTheme(this.state.themeId === 0 ? 'light' : 'dark');
-        Actions.account();
+        this.props.home.setTheme(this.state.themeId);
+
+        RNRestart.Restart();
+
     };
 
 };

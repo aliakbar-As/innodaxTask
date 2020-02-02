@@ -21,6 +21,7 @@ import {
     SuccessfulRegistration
 } from '../screens/registration';
 import { Settings } from '../screens/splash';
+import { Splash } from '../screens/splash/Splash';
 
 class RouterComponent extends Component {
     render() {
@@ -28,17 +29,19 @@ class RouterComponent extends Component {
             <Router>
                 <Lightbox>
                     <Scene key={'root'}>
-                        <Scene
-                            component={Settings}
-                            key={'settings'}
+
+                        {/* <Scene
+                            component={Splash}
+                            initial
+                            key={'splash'}
                             hideNavBar
-                        />
+                        /> */}
 
                         <Scene
                             component={Account}
                             key={'account'}
                             hideNavBar
-
+                            initial
                         />
 
                         <Scene
@@ -68,12 +71,11 @@ class RouterComponent extends Component {
                         <Scene
                             component={SuccessfulRegistration}
                             key={'successfulRegistration'}
-                            initial
                             hideNavBar
                         />
                     </Scene>
 
-
+                    <Scene component={Settings} key={'settings'} hideNavBar />
                 </Lightbox>
             </Router>
         );

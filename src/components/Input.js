@@ -11,7 +11,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/AntDesign';
 import { position, row } from "../assets/styles/styles";
-
+import GetColors from '../assets/styles/themes/GetColors';
 
 const Input = ({
     placeholder,
@@ -68,7 +68,7 @@ const styles = {
     },
     container: {
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: GetColors().borderColor,
         flexDirection: row(),
         alignItems: 'center',
         padding: 5,

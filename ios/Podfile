@@ -41,6 +41,8 @@ target 'InnodaxTask' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RCTRestart', :path => '../node_modules/react-native-restart'
+
   target 'InnodaxTaskTests' do
     inherit! :search_paths
     # Pods for testing

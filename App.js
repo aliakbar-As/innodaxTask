@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import stores from './src/assets/stores';
 import { create } from "mobx-persist";
 import { Provider } from 'mobx-react';
+import GetColors from './src/assets/styles/themes/GetColors';
 
 const hydrate = create({ storage: AsyncStorage });
 
@@ -29,6 +30,8 @@ class App extends Component {
       <Provider {...stores}>
 
         <View style={{ flex: 1 }}>
+          <StatusBar backgroundColor={GetColors().statusBar} barStyle="light-content" />
+
           <RouterComponent />
         </View>
       </Provider>

@@ -13,10 +13,11 @@ import {
 import { Input, Button, Line } from '../../components';
 import Icon from 'react-native-vector-icons/Entypo';
 import { ModalComponent } from '../../components/ModalComponent';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
 import { flex, row, position, fontBold } from '../../assets/styles/styles';
+import GetColors from '../../assets/styles/themes/GetColors';
 
 const australia = require('../../assets/images/countries/australia.png');
 const iran = require('../../assets/images/countries/iran.png');
@@ -64,7 +65,6 @@ class Account extends Component {
         };
     };
 
-
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
     };
@@ -95,14 +95,26 @@ class Account extends Component {
         ];
         return (
             <View style={styles.container}>
+                <TouchableHighlight
+                    onPress={() => Actions.settings()}
+                    underlayColor={'transparent'}>
+                    <Icon
+                        name={'menu'}
+                        color={GetColors().acountInnerTitleColor}
+                        size={30}
+                        style={{ alignSelf: flex(), margin: 16 }}
+                    />
+                </TouchableHighlight>
+
+
                 <View style={styles.mainHdrItemContainer}>
                     {hdrItems.map(item => {
                         return (
-                            <View style={[styles.hdrItemContainer, { backgroundColor: item.passed ? '#727AF9' : '#CFD4E4' }]}>
+                            <View style={[styles.hdrItemContainer, { backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={'#fff'}
+                                    color={GetColors().hdrIconColor}
                                 />
                             </View>
                         );
@@ -129,25 +141,28 @@ class Account extends Component {
                         <View style={styles.cardSection}>
                             <Input
                                 placeholder={GetString().fName}
-                                selectionColor={'#505050'}
+                                selectionColor={GetColors().selectionColor}
                                 value={this.state.fName}
+                                placeholderTextColor={GetColors().selectionColor}
                                 extraStyles={{ width: '45%' }}
                                 onChangeText={fName => this.setState({ fName })}
                             />
 
                             <Input
                                 placeholder={GetString().mName}
-                                selectionColor={'#505050'}
+                                selectionColor={GetColors().selectionColor}
                                 value={this.state.mName}
+                                placeholderTextColor={GetColors().selectionColor}
                                 extraStyles={{ width: '45%' }}
                                 onChangeText={mName => this.setState({ mName })}
                             />
                         </View>
 
                         <Input
-                            selectionColor={'#505050'}
+                            selectionColor={GetColors().selectionColor}
                             placeholder={GetString().lName}
                             value={this.state.lName}
+                            placeholderTextColor={GetColors().selectionColor}
                             onChangeText={lName => this.setState({ lName: lName, disabled: false })}
                         />
 
@@ -175,7 +190,7 @@ class Account extends Component {
                                 <Icon
                                     name={'chevron-small-down'}
                                     size={20}
-                                    color={'gray'}
+                                    color={GetColors().acountInnerTitleColor}
                                 />
                             </View>
                         </TouchableHighlight>
@@ -185,7 +200,7 @@ class Account extends Component {
 
                 <Button
                     disabled={this.state.disabled}
-                    extraStyles={{ backgroundColor: this.state.disabled ? '#CBD1DF' : '#7577FF' }}
+                    extraStyles={{ backgroundColor: this.state.disabled ? GetColors().nextButtonDisabled : GetColors().nextButtonNotDisabled }}
                     onPress={() => this.confirmInfoOnclick()}
                     title={GetString().nextButton}
                 />
@@ -265,13 +280,13 @@ const styles = {
         height: 50,
         width: 50,
         alignItems: 'center',
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         borderRadius: 100,
         justifyContent: 'center',
     },
     lineContainer: {
         height: 1,
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -286,7 +301,7 @@ const styles = {
 
     modalFlagContainer: {
         borderBottomWidth: 1,
-        borderBottomColor: '#eee',
+        borderBottomColor: GetColors().borderColor,
         flexDirection: row(),
         justifyContent: flex(),
         alignItems: 'center',
@@ -296,7 +311,7 @@ const styles = {
         width: Dimensions.get('window').width - 32,
     },
     innerContainer: {
-        backgroundColor: '#fff',
+        backgroundColor: GetColors().mainBgColor,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
@@ -318,7 +333,7 @@ const styles = {
     },
     countryContainer: {
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: GetColors().borderColor,
         padding: 10,
         marginTop: 10,
         flexDirection: row(),
@@ -336,26 +351,25 @@ const styles = {
     },
     hdrCardsectionTitle: {
         textAlign: position(),
-        // textAlign: 'right',
         fontfamily: 'IRANSans(FaNum)_Bold',
         fontSize: 16,
-        color: '#000'
+        color: GetColors().acountHdrTitleColor,
     },
     hdrTitle: {
         fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
         fontSize: 18,
-        color: '#000'
+        color: GetColors().acountHdrTitleColor,
     },
     innerTitle: {
         fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
-        color: 'gray',
+        color: GetColors().acountInnerTitleColor,
         marginVertical: 16
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { Account };

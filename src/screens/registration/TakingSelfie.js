@@ -15,6 +15,7 @@ import { Button } from '../../components';
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import GetString from '../../assets/languages/GetString';
+import GetColors from '../../assets/styles/themes/GetColors';
 
 const widthScreen = Dimensions.get('window').width;
 
@@ -99,13 +100,12 @@ class TakingSelfie extends Component {
                     {hdrItems.map(item => {
                         return (
                             <View style={[styles.hdrItemContainer, {
-                                backgroundColor: item.passed ? '#727AF9' : '#CFD4E4',
-                                zIndex: 1
+                                backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed, zIndex: 1
                             }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={'#fff'}
+                                    color={GetColors().hdrIconColor}
                                 />
                             </View>
                         );
@@ -139,7 +139,7 @@ class TakingSelfie extends Component {
                                 <Icon
                                     name={'image'}
                                     size={50}
-                                    color={'gray'}
+                                    color={GetColors().acountInnerTitleColor}
                                 />
 
                                 <Text style={styles.uploadtitle}>
@@ -209,13 +209,13 @@ const styles = {
         height: 50,
         width: 50,
         alignItems: 'center',
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         borderRadius: 100,
         justifyContent: 'center',
     },
     lineContainer: {
         height: 1,
-        backgroundColor: '#CED1E2',
+        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -236,7 +236,7 @@ const styles = {
     imgContainer: {
         margin: 16,
         borderWidth: 1,
-        borderColor: '#eee'
+        borderColor: GetColors().borderColor
     },
     userPicStyle: {
         width: widthScreen - 40,
@@ -251,7 +251,7 @@ const styles = {
 
     uploadtitle: {
         fontSize: 14,
-        color: 'gray',
+        color: GetColors().acountInnerTitleColor,
         textAlign: 'center',
         marginTop: 10
     },
@@ -267,17 +267,17 @@ const styles = {
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 18,
-        color: '#000'
+        color: GetColors().acountHdrTitleColor
     },
     innerTitle: {
         fontWeight: '600',
         textAlign: 'center',
-        color: 'gray',
+        color: GetColors().acountInnerTitleColor,
         marginVertical: 16
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { TakingSelfie };
