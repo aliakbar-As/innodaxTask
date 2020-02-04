@@ -12,6 +12,7 @@ import GetString from '../../assets/languages/GetString';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Entypo';
 import GetColors from '../../assets/styles/themes/GetColors';
+import { observer, inject } from 'mobx-react';
 
 const widthScreen = Dimensions.get('window').width;
 const tick = require('../../assets/images/tick.png');
@@ -37,36 +38,49 @@ let hdrItems = [
     }
 ];
 
+@inject('home')
+@observer
 class SuccessfulRegistration extends Component {
     render() {
+        let colors = this.props.home.currentTheme;
+
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {
+                backgroundColor: colors.mainBgColor,
+            }]}>
 
 
                 <View style={styles.mainHdrItemContainer}>
                     {hdrItems.map(item => {
                         return (
                             <View style={[styles.hdrItemContainer, {
-                                backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed, zIndex: 1
+                                backgroundColor: item.passed ? colors.hdrItemsBgColorPassed : colors.hdrItemsBgColorNotPassed, zIndex: 1
                             }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={GetColors().hdrIconColor}
+                                    color={colors.hdrIconColor}
                                 />
                             </View>
                         );
                     })}
-                    <View style={styles.lineContainer} />
+                    <View style={[styles.lineContainer, {
+                        backgroundColor: colors.hdrItemBg,
+                    }]} />
                 </View>
 
                 <ScrollView style={{ paddingBottom: 16 }}>
-                    <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
+                    <Text style={[styles.hdrTitle, {
+                        marginTop: 16,
+                        color: colors.acountHdrTitleColor
+                    }]}>
                         {GetString().successHdrTitle}
                     </Text>
 
 
-                    <Text style={styles.innerTitle}>
+                    <Text style={[styles.innerTitle, {
+                        color: colors.acountInnerTitleColor,
+                    }]}>
                         {GetString().successDes}
                     </Text>
 
@@ -87,7 +101,9 @@ class SuccessfulRegistration extends Component {
                         onPress={() => Actions.pop()}
                         style={{ alignSelf: 'center', marginTop: 10 }}>
 
-                        <Text style={styles.uploadtitle}>
+                        <Text style={[styles.uploadtitle, {
+                            color: colors.acountInnerTitleColor,
+                        }]}>
                             {GetString().goBack}
                         </Text>
 
@@ -117,7 +133,6 @@ const styles = {
     },
     lineContainer: {
         height: 1,
-        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -143,7 +158,6 @@ const styles = {
     },
     uploadtitle: {
         fontSize: 14,
-        color: GetColors().acountInnerTitleColor,
         textAlign: 'center',
         marginTop: 10
     },
@@ -159,17 +173,14 @@ const styles = {
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 18,
-        color: GetColors().acountHdrTitleColor
     },
     innerTitle: {
         fontWeight: '600',
         textAlign: 'center',
-        color: GetColors().acountInnerTitleColor,
         marginVertical: 16
     },
     container: {
         flex: 1,
-        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { SuccessfulRegistration };

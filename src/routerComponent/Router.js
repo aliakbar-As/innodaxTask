@@ -40,8 +40,8 @@ class RouterComponent extends Component {
                         <Scene
                             component={Account}
                             key={'account'}
-                            hideNavBar
                             initial
+                            hideNavBar
                         />
 
                         <Scene

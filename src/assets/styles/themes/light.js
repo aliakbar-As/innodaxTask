@@ -13,6 +13,7 @@ const lightColors = {
     hdrItemsBgColorNotPassed: '#CFD4E4',
     hdrIconColor: '#fff',
     statusBar: '#757575',
+    inputColor: '#2d2d2d',
 
 
 };

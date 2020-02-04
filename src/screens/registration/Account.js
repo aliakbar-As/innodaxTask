@@ -18,6 +18,7 @@ import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
 import { flex, row, position, fontBold } from '../../assets/styles/styles';
 import GetColors from '../../assets/styles/themes/GetColors';
+import stores from '../../assets/stores';
 
 const australia = require('../../assets/images/countries/australia.png');
 const iran = require('../../assets/images/countries/iran.png');
@@ -71,6 +72,8 @@ class Account extends Component {
 
     render() {
 
+        let colors = this.props.home.currentTheme;
+
         let flags = [
             {
                 id: 0,
@@ -94,13 +97,15 @@ class Account extends Component {
             },
         ];
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {
+                backgroundColor: colors.mainBgColor
+            }]}>
                 <TouchableHighlight
                     onPress={() => Actions.settings()}
                     underlayColor={'transparent'}>
                     <Icon
                         name={'menu'}
-                        color={GetColors().acountInnerTitleColor}
+                        color={colors.acountInnerTitleColor}
                         size={30}
                         style={{ alignSelf: flex(), margin: 16 }}
                     />
@@ -110,79 +115,99 @@ class Account extends Component {
                 <View style={styles.mainHdrItemContainer}>
                     {hdrItems.map(item => {
                         return (
-                            <View style={[styles.hdrItemContainer, { backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed }]}>
+                            <View style={[styles.hdrItemContainer, { backgroundColor: item.passed ? colors.hdrItemsBgColorPassed : colors.hdrItemsBgColorNotPassed }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={GetColors().hdrIconColor}
+                                    color={colors.hdrIconColor}
                                 />
                             </View>
                         );
                     })}
-                    <View style={styles.lineContainer} />
+                    <View style={[styles.lineContainer, {
+                        backgroundColor: colors.hdrItemBg,
+                    }]} />
                 </View>
 
 
                 <ScrollView>
-                    <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
+                    <Text style={[styles.hdrTitle, {
+                        marginTop: 16,
+                        color: colors.acountHdrTitleColor,
+                    }]}>
                         {GetString().verifyingAccount}
                     </Text>
 
 
-                    <Text style={styles.innerTitle}>
+                    <Text style={[styles.innerTitle, {
+                        color: colors.acountInnerTitleColor,
+                    }]}>
                         {GetString().accountDes}
                     </Text>
 
                     <View style={{ padding: 16, }}>
-                        <Text style={styles.hdrCardsectionTitle}>
+                        <Text style={[styles.hdrCardsectionTitle, {
+                            color: colors.acountHdrTitleColor,
+                        }]}>
                             {GetString().legalName}
                         </Text>
 
                         <View style={styles.cardSection}>
                             <Input
                                 placeholder={GetString().fName}
-                                selectionColor={GetColors().selectionColor}
+                                selectionColor={colors.selectionColor}
                                 value={this.state.fName}
-                                placeholderTextColor={GetColors().selectionColor}
-                                extraStyles={{ width: '45%' }}
+                                placeholderTextColor={colors.selectionColor}
+                                extraStyles={{ width: '45%', }}
+                                extraInpuStyles={{ color: colors.inputColor }}
                                 onChangeText={fName => this.setState({ fName })}
                             />
 
                             <Input
                                 placeholder={GetString().mName}
-                                selectionColor={GetColors().selectionColor}
+                                selectionColor={colors.selectionColor}
                                 value={this.state.mName}
-                                placeholderTextColor={GetColors().selectionColor}
+                                placeholderTextColor={colors.selectionColor}
                                 extraStyles={{ width: '45%' }}
+                                extraInpuStyles={{ color: colors.inputColor }}
                                 onChangeText={mName => this.setState({ mName })}
                             />
                         </View>
 
                         <Input
-                            selectionColor={GetColors().selectionColor}
+                            selectionColor={colors.selectionColor}
                             placeholder={GetString().lName}
                             value={this.state.lName}
-                            placeholderTextColor={GetColors().selectionColor}
+                            placeholderTextColor={colors.selectionColor}
+                            extraInpuStyles={{ color: colors.inputColor }}
                             onChangeText={lName => this.setState({ lName: lName, disabled: false })}
                         />
 
                     </View>
 
                     <View style={{ paddingHorizontal: 16, }}>
-                        <Text style={styles.hdrCardsectionTitle}>
+                        <Text style={[styles.hdrCardsectionTitle, {
+                            color: colors.acountHdrTitleColor,
+                        }]}>
                             {GetString().country}
                         </Text>
 
                         <TouchableHighlight
                             onPress={() => this.setModalVisible(true)}
                             underlayColor={'transparent'}>
-                            <View style={styles.countryContainer}>
+                            <View style={[styles.countryContainer, {
+                                borderColor: colors.borderColor,
+
+                            }]}>
                                 <View style={styles.innerCountryContainer}>
                                     <Image
                                         source={this.state.flag}
                                         style={styles.flagIcons}
                                     />
-                                    <Text style={[styles.hdrCardsectionTitle, { fontSize: 15, marginHorizontal: 10 }]}>
+                                    <Text style={[styles.hdrCardsectionTitle, {
+                                        fontSize: 15, marginHorizontal: 10,
+                                        color: colors.acountHdrTitleColor,
+                                    }]}>
                                         {this.state.flagTitle}
                                     </Text>
                                 </View>
@@ -190,7 +215,7 @@ class Account extends Component {
                                 <Icon
                                     name={'chevron-small-down'}
                                     size={20}
-                                    color={GetColors().acountInnerTitleColor}
+                                    color={colors.acountInnerTitleColor}
                                 />
                             </View>
                         </TouchableHighlight>
@@ -200,7 +225,7 @@ class Account extends Component {
 
                 <Button
                     disabled={this.state.disabled}
-                    extraStyles={{ backgroundColor: this.state.disabled ? GetColors().nextButtonDisabled : GetColors().nextButtonNotDisabled }}
+                    extraStyles={{ backgroundColor: this.state.disabled ? colors.nextButtonDisabled : colors.nextButtonNotDisabled }}
                     onPress={() => this.confirmInfoOnclick()}
                     title={GetString().nextButton}
                 />
@@ -212,7 +237,7 @@ class Account extends Component {
                     visible={this.state.modalVisible}>
 
                     <View style={styles.modalView}>
-                        <View style={styles.innerContainer}>
+                        <View style={[styles.innerContainer]}>
                             {flags.map(item => {
                                 return (
                                     <TouchableHighlight
@@ -220,13 +245,18 @@ class Account extends Component {
                                         underlayColor={'transparent'}>
                                         <View
                                             key={item.id}
-                                            style={styles.modalFlagContainer}>
+                                            style={[styles.modalFlagContainer, {
+                                                borderBottomColor: '#eee',
+                                            }]}>
                                             <Image
                                                 source={item.flag}
                                                 style={styles.flagIcons}
                                             />
 
-                                            <Text style={[styles.hdrCardsectionTitle, { fontSize: 15, marginLeft: 10 }]}>
+                                            <Text style={[styles.hdrCardsectionTitle, {
+                                                fontSize: 15, marginHorizontal: 10,
+                                                color: '#707070',
+                                            }]}>
                                                 {item.title}
                                             </Text>
                                         </View>
@@ -286,7 +316,6 @@ const styles = {
     },
     lineContainer: {
         height: 1,
-        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -301,7 +330,6 @@ const styles = {
 
     modalFlagContainer: {
         borderBottomWidth: 1,
-        borderBottomColor: GetColors().borderColor,
         flexDirection: row(),
         justifyContent: flex(),
         alignItems: 'center',
@@ -311,13 +339,13 @@ const styles = {
         width: Dimensions.get('window').width - 32,
     },
     innerContainer: {
-        backgroundColor: GetColors().mainBgColor,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         width: Dimensions.get('window').width - 32,
         height: Dimensions.get('window').height / 3,
-        borderRadius: 10
+        borderRadius: 10,
+        backgroundColor: '#fff',
     },
     modalView: {
         backgroundColor: 'rgba(0,0,0,0.8)',
@@ -333,7 +361,6 @@ const styles = {
     },
     countryContainer: {
         borderWidth: 1,
-        borderColor: GetColors().borderColor,
         padding: 10,
         marginTop: 10,
         flexDirection: row(),
@@ -353,23 +380,21 @@ const styles = {
         textAlign: position(),
         fontfamily: 'IRANSans(FaNum)_Bold',
         fontSize: 16,
-        color: GetColors().acountHdrTitleColor,
     },
     hdrTitle: {
         fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
         fontSize: 18,
-        color: GetColors().acountHdrTitleColor,
     },
     innerTitle: {
         fontfamily: 'IRANSans(FaNum)_Bold',
         textAlign: 'center',
-        color: GetColors().acountInnerTitleColor,
         marginVertical: 16
     },
     container: {
         flex: 1,
-        backgroundColor: GetColors().mainBgColor,
+        // backgroundColor: GetColors().mainBgColor,
+
     },
 };
 export { Account };

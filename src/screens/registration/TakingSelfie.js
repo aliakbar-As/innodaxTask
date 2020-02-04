@@ -16,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import GetString from '../../assets/languages/GetString';
 import GetColors from '../../assets/styles/themes/GetColors';
+import { inject, observer } from 'mobx-react';
 
 const widthScreen = Dimensions.get('window').width;
 
@@ -40,6 +41,8 @@ let hdrItems = [
     }
 ];
 
+@inject('home')
+@observer
 class TakingSelfie extends Component {
     constructor(props) {
         super(props);
@@ -92,35 +95,46 @@ class TakingSelfie extends Component {
 
 
     render() {
+        let colors = this.props.home.currentTheme;
+
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {
+                backgroundColor: colors.mainBgColor,
+            }]}>
 
 
                 <View style={styles.mainHdrItemContainer}>
                     {hdrItems.map(item => {
                         return (
                             <View style={[styles.hdrItemContainer, {
-                                backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed, zIndex: 1
+                                backgroundColor: item.passed ? colors.hdrItemsBgColorPassed : colors.hdrItemsBgColorNotPassed, zIndex: 1
                             }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={GetColors().hdrIconColor}
+                                    color={colors.hdrIconColor}
                                 />
                             </View>
                         );
                     })}
-                    <View style={styles.lineContainer} />
+                    <View style={[styles.lineContainer, {
+                        backgroundColor: colors.hdrItemBg,
+                    }]} />
                 </View>
 
 
                 <ScrollView style={{ paddingBottom: 16 }}>
-                    <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
+                    <Text style={[styles.hdrTitle, {
+                        marginTop: 16,
+                        color: colors.acountHdrTitleColor
+                    }]}>
                         {GetString().selfieTitle}
                     </Text>
 
 
-                    <Text style={styles.innerTitle}>
+                    <Text style={[styles.innerTitle, {
+                        color: colors.acountInnerTitleColor,
+                    }]}>
                         {GetString().selfieDes}
                     </Text>
 
@@ -139,17 +153,22 @@ class TakingSelfie extends Component {
                                 <Icon
                                     name={'image'}
                                     size={50}
-                                    color={GetColors().acountInnerTitleColor}
+                                    color={colors.acountInnerTitleColor}
                                 />
 
-                                <Text style={styles.uploadtitle}>
+                                <Text style={[styles.uploadtitle, {
+                                    color: colors.acountInnerTitleColor,
+                                }]}>
                                     {GetString().selfie}
                                 </Text>
 
                             </ImageBackground>
                         </TouchableHighlight>
                         :
-                        <View style={styles.imgContainer}>
+                        <View style={[styles.imgContainer, {
+                            borderColor: colors.borderColor
+
+                        }]}>
                             <Image
                                 source={{ uri: this.state.userPic }}
                                 style={styles.imageStyle}
@@ -168,7 +187,9 @@ class TakingSelfie extends Component {
                         onPress={() => Actions.pop()}
                         style={{ alignSelf: 'center', marginTop: 10 }}>
 
-                        <Text style={styles.uploadtitle}>
+                        <Text style={[styles.uploadtitle, {
+                            color: colors.acountInnerTitleColor,
+                        }]}>
                             {GetString().goBack}
                         </Text>
 
@@ -215,7 +236,6 @@ const styles = {
     },
     lineContainer: {
         height: 1,
-        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -236,7 +256,6 @@ const styles = {
     imgContainer: {
         margin: 16,
         borderWidth: 1,
-        borderColor: GetColors().borderColor
     },
     userPicStyle: {
         width: widthScreen - 40,
@@ -251,7 +270,6 @@ const styles = {
 
     uploadtitle: {
         fontSize: 14,
-        color: GetColors().acountInnerTitleColor,
         textAlign: 'center',
         marginTop: 10
     },
@@ -267,17 +285,14 @@ const styles = {
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 18,
-        color: GetColors().acountHdrTitleColor
     },
     innerTitle: {
         fontWeight: '600',
         textAlign: 'center',
-        color: GetColors().acountInnerTitleColor,
         marginVertical: 16
     },
     container: {
         flex: 1,
-        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { TakingSelfie };

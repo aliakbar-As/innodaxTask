@@ -13,6 +13,7 @@ import GetString from '../../assets/languages/GetString';
 import { row } from '../../assets/styles/styles';
 import Icon from 'react-native-vector-icons/Entypo';
 import GetColors from '../../assets/styles/themes/GetColors';
+import { inject, observer } from 'mobx-react';
 
 const passport = require('../../assets/images/identity/passport.png');
 const driver = require('../../assets/images/identity/driver.png');
@@ -40,8 +41,13 @@ let hdrItems = [
     }
 ];
 
+@inject('home')
+@observer
 class Identity extends Component {
+
     render() {
+        let colors = this.props.home.currentTheme;
+
         let items = [
             {
                 id: 0,
@@ -61,31 +67,41 @@ class Identity extends Component {
         ];
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {
+                backgroundColor: colors.mainBgColor,
+            }]}>
 
                 <View style={styles.mainHdrItemContainer}>
                     {hdrItems.map(item => {
                         return (
-                            <View style={[styles.hdrItemContainer, { 
-                                backgroundColor: item.passed ? GetColors().hdrItemsBgColorPassed : GetColors().hdrItemsBgColorNotPassed, zIndex: 1 }]}>
+                            <View style={[styles.hdrItemContainer, {
+                                backgroundColor: item.passed ? colors.hdrItemsBgColorPassed : colors.hdrItemsBgColorNotPassed, zIndex: 1
+                            }]}>
                                 <Icon
                                     name={item.icon}
                                     size={15}
-                                    color={GetColors().hdrIconColor}
+                                    color={colors.hdrIconColor}
                                 />
                             </View>
                         );
                     })}
-                    <View style={styles.lineContainer} />
+                    <View style={[styles.lineContainer, {
+                        backgroundColor: colors.hdrItemBg,
+                    }]} />
                 </View>
 
                 <ScrollView>
-                    <Text style={[styles.hdrTitle, { marginTop: 16 }]}>
+                    <Text style={[styles.hdrTitle, {
+                        marginTop: 16,
+                        color: colors.acountHdrTitleColor
+                    }]}>
                         {GetString().identity}
                     </Text>
 
 
-                    <Text style={styles.innerTitle}>
+                    <Text style={[styles.innerTitle, {
+                        color: colors.acountInnerTitleColor,
+                    }]}>
                         {GetString().identityDes}
                     </Text>
 
@@ -96,13 +112,17 @@ class Identity extends Component {
                                     onPress={() => this.itemSelectedOnclick(item)}
                                     key={item.id}
                                     underlayColor={'transparent'}>
-                                    <View style={styles.itemsContainer}>
+                                    <View style={[styles.itemsContainer, {
+                                        borderColor: colors.borderColor,
+                                    }]}>
                                         <Image
                                             style={{ width: 30, height: 30 }}
                                             source={item.icon}
                                         />
 
-                                        <Text style={styles.primarytitle}>
+                                        <Text style={[styles.primarytitle, {
+                                            color: colors.acountInnerTitleColor,
+                                        }]}>
                                             {item.title}
                                         </Text>
                                     </View>
@@ -159,7 +179,6 @@ const styles = {
     },
     lineContainer: {
         height: 1,
-        backgroundColor: GetColors().hdrItemBg,
         width: '60%',
         position: 'absolute',
         right: '30%',
@@ -173,7 +192,6 @@ const styles = {
 
     itemsContainer: {
         borderWidth: 1,
-        borderColor: GetColors().borderColor,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -182,7 +200,6 @@ const styles = {
     },
     primarytitle: {
         fontSize: 14,
-        color: GetColors().acountInnerTitleColor,
         textAlign: 'center',
         marginTop: 10
     },
@@ -197,17 +214,14 @@ const styles = {
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 18,
-        color: GetColors().acountHdrTitleColor
     },
     innerTitle: {
         fontWeight: '600',
         textAlign: 'center',
-        color: GetColors().acountInnerTitleColor,
         marginVertical: 16,
     },
     container: {
         flex: 1,
-        backgroundColor: GetColors().mainBgColor,
     },
 };
 export { Identity };

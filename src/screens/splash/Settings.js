@@ -22,6 +22,7 @@ import { inject, observer } from 'mobx-react';
 import GetString from '../../assets/languages/GetString';
 import { row, flex, position } from '../../assets/styles/styles';
 import RNRestart from 'react-native-restart';
+import GetColors from '../../assets/styles/themes/GetColors';
 
 const { width, height } = Dimensions.get('window');
 
@@ -40,7 +41,7 @@ class Settings extends React.Component {
             Halls: false,
             Hairdressers: false,
             themeId: 0
-            
+
         }
     }
 
@@ -72,10 +73,10 @@ class Settings extends React.Component {
     render() {
         return (
 
-            <View style={styles.container}>
+            <View style={[styles.container]}>
 
                 <Animated.View style={[styles.lightboxContainer, this.state.xy.getLayout()]}>
-{/* 
+                    {/* 
                     <TouchableOpacity
                         style={[styles.onclicks, { alignSelf: flex() }]}
                         onPress={() => Actions.pop()}>
@@ -166,14 +167,22 @@ class Settings extends React.Component {
 
         this.props.home.setTheme(this.state.themeId);
 
-        RNRestart.Restart();
+        if (this.state.themeId === 0) {
+            this.props.home.setLightTheme();
+        } else {
+            this.props.home.setDarkTheme();
+        }
+
+        // RNRestart.Restart();
+        Actions.replace('account');
+        // Actions.refresh({ key: Math.random() });
 
     };
 
 };
 
 const styles = StyleSheet.create({
-    
+
     radioContainer: {
         height: 20,
         width: 20,

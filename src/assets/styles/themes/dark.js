@@ -13,7 +13,7 @@ const darkColors = {
     hdrItemsBgColorNotPassed: '#41479B',
     hdrIconColor: '#fff',
     statusBar: '#41479B',
-
+    inputColor: '#fff'
 };
 
 export default darkColors;
